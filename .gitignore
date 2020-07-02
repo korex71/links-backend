@@ -1,0 +1,4 @@
+/.env
+/.git
+/api.rest
+/node_modules
