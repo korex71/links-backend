@@ -5,30 +5,28 @@ const {Link} = require('../models')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-    const accountId = 1 //req.id
+    const {accountId} = req
     const links = await Link.findAll({where: {accountId}})
 
     return res.jsonOK(links)
 })
 
 router.post('/', async (req, res) => {
-    const AccountId = 1 //req.id
-    const {label, url, isSocial} = req.body
+    const {accountId, body} = req
+    const {label, url, isSocial} = body
 
     const image = 'https://google.com/image.jpg'
 
-    const link = await Link.create({label, url, isSocial, image, AccountId})
-    console.log(link)
+    const link = await Link.create({label, url, isSocial, image, accountId})
     return res.jsonOK(link)
 })
 
 router.put('/:id', async (req, res) => {
-    const AccountId = 1 //req.id
-    const {id} = req.params
-    const {body} = req
+    const {accountId, body, params} = req 
+    const {id} = params
     const fields = ['label', 'url', 'isSocial']
 
-    const link = await Link.findOne({where: {id, AccountId}})
+    const link = await Link.findOne({where: {id, accountId}})
     if(!link) return res.jsonNotFound()
     fields.map(fieldName => {
         const newValue = body[fieldName]
@@ -42,17 +40,17 @@ router.put('/:id', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    const AccountId = 1 // req.id
-    const {id} = req.params
-    const link = await Link.findOne({where: {id, AccountId}})
+    const {accountId, params} = req // req.id
+    const {id} = params
+    const link = await Link.findOne({where: {id, accountId}})
     if(!link) return res.jsonNotFound()
     return res.jsonOK(link)
 })
 
 router.delete('/:id', async (req, res) => {
-    const AccountId = 1
-    const {id} = req.params
-    const link = await Link.findOne({where: {id, AccountId}});
+    const {accountId, params} = req
+    const {id} = params
+    const link = await Link.findOne({where: {id, accountId}});
     if(!link) return res.jsonNotFound()
     await link.destroy()
     return res.jsonOK()
