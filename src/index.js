@@ -8,7 +8,7 @@ const linkController = require('./controllers/link')
 
 const app = express()
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "https://korex.xyz");
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
     app.use(cors())
     next()
