@@ -6,6 +6,7 @@ const {accountSignUp, accountSignIn} = require('../validators/account')
 const {getMessage} = require('../helpers/messages')
 const {generateJwt, generateRefreshJwt, getTokenFromHeaders, verifyRefreshJwt} = require('../helpers/jwt')
 const saltRounds = 10
+
 //att
 router.post('/sign-in', accountSignIn, async (req, res) => {
     const {email, password} = req.body;
@@ -38,7 +39,6 @@ router.post('/sign-up', accountSignUp, async (req, res) => {
 })
 
 router.post('/refresh', async (req, res) => {
-    console.log(req.headers)
     const token = getTokenFromHeaders(req.headers)
     if(!token) return res.jsonUnauthorized(null, 'Invalid token')
     try{
