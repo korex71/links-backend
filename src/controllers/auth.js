@@ -1,5 +1,5 @@
 const express = require('express')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt-nodejs')
 const {Account} = require('../models')
 const router = express.Router()
 const {accountSignUp, accountSignIn} = require('../validators/account')

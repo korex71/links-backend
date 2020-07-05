@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 })
 
 db.sequelize.sync().then(() => {
-    app.listen(3001, () => {
+    app.listen(3000, () => {
         
         console.log('Aberto na porta 3001')
     })
